@@ -100,7 +100,7 @@
         .formula-display {
             background: linear-gradient(to right, #f8f9ff, #f0f7ff);
             border-radius: 12px;
-            padding: 20px 25px;
+            padding: 2px 25px;
             margin-bottom: 30px;
             border-left: 6px solid #1a2a6c;
             display: flex;
@@ -616,14 +616,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
             border-bottom: 2px solid #eaeaea;
         }
         
         .keyboard-title {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 1;
             color: #1a2a6c;
         }
         
@@ -677,7 +677,7 @@
             justify-content: center;
             user-select: none;
             touch-action: manipulation;
-			 min-height: 50px;  
+            min-height: 50px;  
         }
         
         .keyboard-btn:hover {
@@ -694,15 +694,19 @@
             background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
         }
         
-        .keyboard-btn.zero {
+        /* Số 0 chiếm 3 cột */
+        .keyboard-grid-3x3 .zero {
             grid-column: span 3;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 12px 6px;
         }
         
         .keyboard-controls {
             display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            gap: 4px;
-            margin-top: 4px;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
         }
         
         .keyboard-btn.clear {
@@ -762,7 +766,7 @@
             justify-content: center;
             transition: all 0.3s;
             touch-action: manipulation;
-			display: none; /* Ẩn nút bàn phím trên desktop */
+            display: none; /* Ẩn nút bàn phím trên desktop */
         }
         
         .keyboard-open-btn:hover {
@@ -851,11 +855,19 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-calculator"></i> Bảng Tính Hoa Hồng CTV</h1>
-            <p class="subtitle">Tính hoa hồng theo tỷ lệ 0.4% cho BILL A và 0.2% cho BILL B</p>
+            
         </header>
+         <!-- chổ này để thêm <div </div> -->
         
         
-                <div class="current-time" id="currentTime">Đang cập nhật thời gian...</div>
+        <div class="calculator-container">
+            <div class="formula-display">
+                <div class="formula-text">
+                    <strong> </strong> 
+                    <span><div class="current-time" id="currentTime">Đang cập nhật thời gian...</div></span>  
+                    
+                </div>
+                
             </div>
             
             <!-- Wrapper cho bảng để cuộn ngang trên mobile -->
@@ -864,11 +876,11 @@
                     <thead>
                         <tr>
                             <th width="8%">STT</th>
-                            <th width="22%">BILL (A) vnđ</th>
-                            <th width="18%">0.4% vnđ</th>
-                            <th width="22%">BILL (B) vnđ</th>
-                            <th width="18%">0.2% vnđ</th>
-                            <th width="12%">Tổng vnđ</th>
+                            <th width="22%">BILL (A) VNĐ</th>
+                            <th width="18%">0.4% VNĐ</th>
+                            <th width="22%">BILL (B) VNĐ</th>
+                            <th width="18%">0.2% VNĐ</th>
+                            <th width="12%">Tổng VNĐ</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -877,11 +889,11 @@
                     <tfoot>
                         <tr class="total-row">
                             <td><strong>TỔNG</strong></td>
-                            <td id="totalAInput" class="result-cell">0 vnđ</td>
-                            <td id="totalA" class="result-cell">0 vnđ</td>
-                            <td id="totalBInput" class="result-cell">0 vnđ</td>
-                            <td id="totalB" class="result-cell">0 vnđ</td>
-                            <td id="grandTotal" class="result-cell grand-total-cell">0 vnđ</td>
+                            <td id="totalAInput" class="result-cell">0 VNĐ</td>
+                            <td id="totalA" class="result-cell">0 VNĐ</td>
+                            <td id="totalBInput" class="result-cell">0 VNĐ</td>
+                            <td id="totalB" class="result-cell">0 VNĐ</td>
+                            <td id="grandTotal" class="result-cell grand-total-cell">0 VNĐ</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -907,13 +919,13 @@
             <div class="export-info">
                 <p><i class="fas fa-download"></i> File Excel xuất ra sẽ có định dạng tiền Việt Nam: 1.000 TR</p>
                 <p><i class="fas fa-calendar-alt"></i> Tên file tự động chứa ngày giờ xuất báo cáo</p>
-                <p><i class="fas fa-keyboard"></i> Sử dụng bàn phím ảo 3x3 để nhập liệu dễ dàng</p>
+                
             </div>
             <div>
                 <p>Bảng tính / Hoa Hồng CTV ©2026</p>
                 <p id="lastExportInfo">Chưa có file nào được xuất</p>
                 <p>Thiết Kế Bởi 21 Quân sự</p>
-				<p>https://tvk1991.github.io</p>
+                <p>https://tvk1991.github.io</p>
             </div>
         </div>
     </div>
@@ -927,8 +939,7 @@
     <div class="keyboard-modal" id="keyboardModal">
         <div class="keyboard-container">
             <div class="keyboard-header">
-                <div class="keyboard-title">
-                            </div>
+                
                 <button class="close-keyboard" id="closeKeyboardBtn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -942,6 +953,7 @@
                 0
             </div>
             
+            <!-- Bàn phím 3x3 đã được sửa - số 0 nằm dưới 789 và chiếm 3 cột -->
             <div class="keyboard-grid-3x3">
                 <div class="keyboard-btn number" data-key="1">1</div>
                 <div class="keyboard-btn number" data-key="2">2</div>
@@ -952,16 +964,19 @@
                 <div class="keyboard-btn number" data-key="7">7</div>
                 <div class="keyboard-btn number" data-key="8">8</div>
                 <div class="keyboard-btn number" data-key="9">9</div>
+                <!-- Số 0 chiếm 3 cột và nằm dưới 789 -->
+                <div class="keyboard-btn number zero" data-key="0">0</div>
             </div>
             
+            <!-- Hàng điều khiển: Xóa và Backspace -->
             <div class="keyboard-controls">
                 <div class="keyboard-btn clear" data-key="clear">Xóa</div>
-                <div class="keyboard-btn number zero" data-key="0">0</div>
                 <div class="keyboard-btn backspace" data-key="backspace">
                     <i class="fas fa-backspace"></i>
                 </div>
             </div>
             
+            <!-- Hàng điều khiển: OK và Tiếp -->
             <div class="keyboard-controls">
                 <div class="keyboard-btn enter" data-key="ok" style="grid-column: span 2;">
                     <i class="fas fa-check"></i> OK
@@ -1074,8 +1089,8 @@
             // Định dạng số với dấu chấm phân cách hàng nghìn
             const formatted = roundedNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             
-            // Thêm "vnđ" vào sau
-            return formatted + ' vnđ';
+            // Thêm "VNĐ" vào sau
+            return formatted + ' VNĐ';
         }
         
         // Định dạng input với dấu chấm phân cách
@@ -1107,12 +1122,12 @@
                 <td class="input-cell">
                     <input type="text" id="valueA-${rowNumber}" class="value-input" data-type="A" data-row="${rowNumber}" data-col="A" placeholder="Nhấn để chọn" readonly>
                 </td>
-                <td class="result-cell" id="resultA-${rowNumber}">0 vnđ</td>
+                <td class="result-cell" id="resultA-${rowNumber}">0 VNĐ</td>
                 <td class="input-cell">
                     <input type="text" id="valueB-${rowNumber}" class="value-input" data-type="B" data-row="${rowNumber}" data-col="B" placeholder="Nhấn để chọn" readonly>
                 </td>
-                <td class="result-cell" id="resultB-${rowNumber}">0 vnđ</td>
-                <td class="result-cell" id="rowTotal-${rowNumber}">0 vnđ</td>
+                <td class="result-cell" id="resultB-${rowNumber}">0 VNĐ</td>
+                <td class="result-cell" id="rowTotal-${rowNumber}">0 VNĐ</td>
             `;
             
             tableBody.appendChild(newRow);
@@ -1407,9 +1422,9 @@
                 totalBInput += valueB;
                 
                 // Lấy kết quả từ hiển thị (đã được tính)
-                const resultA = parseFloat(document.getElementById(`resultA-${rowId}`).textContent.replace(/\./g, '').replace(' vnđ', '')) || 0;
-                const resultB = parseFloat(document.getElementById(`resultB-${rowId}`).textContent.replace(/\./g, '').replace(' vnđ', '')) || 0;
-                const rowTotal = parseFloat(document.getElementById(`rowTotal-${rowId}`).textContent.replace(/\./g, '').replace(' vnđ', '')) || 0;
+                const resultA = parseFloat(document.getElementById(`resultA-${rowId}`).textContent.replace(/\./g, '').replace(' VNĐ', '')) || 0;
+                const resultB = parseFloat(document.getElementById(`resultB-${rowId}`).textContent.replace(/\./g, '').replace(' VNĐ', '')) || 0;
+                const rowTotal = parseFloat(document.getElementById(`rowTotal-${rowId}`).textContent.replace(/\./g, '').replace(' VNĐ', '')) || 0;
                 
                 // Tính tổng kết quả
                 totalAResult += resultA;
@@ -1573,11 +1588,11 @@
             // Thêm tiêu đề
             wsData.push([
                 'STT', 
-                'BILL (A) vnđ', 
-                '0.4% vnđ', 
-                'BILL (B) vnđ', 
-                '0.2% vnđ', 
-                'Tổng vnđ'
+                'BILL (A) VNĐ', 
+                '0.4% VNĐ', 
+                'BILL (B) VNĐ', 
+                '0.2% VNĐ', 
+                'Tổng VNĐ'
             ]);
             
             // Thêm dữ liệu từ bảng
@@ -1633,7 +1648,7 @@
             
             // Thiết lập độ rộng cột
             const wscols = [
-                {wch: 20},   // STT
+                {wch: 8},   // STT
                 {wch: 25},  // BILL (A)
                 {wch: 20},  // 0.4% của A
                 {wch: 25},  // BILL (B)
