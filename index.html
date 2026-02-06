@@ -859,16 +859,133 @@
         </header>
          <!-- chổ này để thêm <div </div> -->
         
-        
+         <!-- Dòng Thơi Gian và Nhập Tên -->
         <div class="calculator-container">
-            <div class="formula-display">
-                <div class="formula-text">
-                    <strong>Times </strong> 
-                    <span><div class="current-time" id="currentTime">Đang cập nhật thời gian...</div></span>  
-                    
+    <div class="formula-display">
+        <div class="formula-text">
+            <strong>Times</strong> 
+            <div class="time-name-container">
+                <div class="current-time" id="currentTime">Đang cập nhật thời gian...</div>
+                <div class="name-input-container">
+                    <input 
+                        type="text" 
+                        class="name-input" 
+                        id="nameInput" 
+                        placeholder="NHẬP TÊN CỦA BẠN" 
+                        maxlength="30"
+                    >
                 </div>
-                
             </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.time-name-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.name-input-container {
+    position: relative;
+}
+
+.name-input {
+    font-size: 2.2em; /* Cỡ chữ lớn */
+    color: #ff0000; /* Màu đỏ */
+    font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive; /* Font nghệ thuật */
+    font-weight: bold;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid #ff0000;
+    outline: none;
+    padding: 10px 5px;
+    width: 400px;
+    max-width: 100%;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.name-input::placeholder {
+    color: rgba(255, 0, 0, 0.6);
+    font-style: italic;
+}
+
+.name-input:focus {
+    border-bottom: 3px solid #ff3333;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.name-input:hover {
+    transform: scale(1.02);
+}
+
+/* Hiệu ứng glow cho chữ */
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
+    50% { text-shadow: 0 0 10px #ff3333, 0 0 20px #ff3333; }
+    100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
+}
+
+.name-input:focus {
+    animation: glow 2s infinite;
+}
+
+/* Responsive cho thiết bị nhỏ */
+@media (max-width: 768px) {
+    .time-name-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .name-input {
+        font-size: 1.8em;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .name-input {
+        font-size: 1.5em;
+    }
+}
+</style>
+
+<script>
+// Tùy chọn: Thêm hiệu ứng cho input khi nhập
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('nameInput');
+    
+    if (nameInput) {
+        // Lưu tên vào localStorage khi người dùng nhập
+        nameInput.addEventListener('input', function() {
+            localStorage.setItem('userName', this.value);
+        });
+        
+        // Khôi phục tên từ localStorage nếu có
+        const savedName = localStorage.getItem('userName');
+        if (savedName) {
+            nameInput.value = savedName;
+        }
+        
+        // Hiệu ứng focus
+        nameInput.addEventListener('focus', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        
+        nameInput.addEventListener('blur', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+});
+</script>
             
             <!-- Wrapper cho bảng để cuộn ngang trên mobile -->
             <div class="table-responsive">
